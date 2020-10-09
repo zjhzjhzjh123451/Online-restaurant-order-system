@@ -1,0 +1,168 @@
+{% extends 'index.html' %}
+{% block content%}
+
+<div class="row-content am-cf">
+
+
+    <div class="row">
+
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title am-fl">Edit the {{the_dish.name}} dishes here</div>
+                    <div class="widget-function am-fr">
+                        <a href="javascript:;" class="am-icon-cog"></a>
+                    </div>
+                </div>
+                <div class="widget-body am-fr">
+
+                    <form class="am-form tpl-form-line-form" action="{% url 'myadmin:dish_edit' the_dish.id %}" method="post"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="am-form-group">
+                            <label for="user-phone" class="am-u-sm-3 am-form-label">Dish type</label>
+                            <div class="am-u-sm-9">
+                                <select data-am-selected="{searchBox: 0}" style="display: none;" name="typeid">
+                                    {% for item in types%}
+                                    {% if the_dish.typeid.name == item.name %}
+                                    <option value="{{item.id}}" selected>{{item.name}}</option>
+                                    {% else %}
+                                    <option value="{{item.id}}">{{item.name}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">Dish Name </label>
+                            <div class="am-u-sm-9">
+                                <input type="text" class="tpl-form-input"
+                                       placeholder="Please write the name of the dish" name="name"
+                                       value="{{the_dish.name}}">
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">Dish Description </label>
+                            <div class="am-u-sm-9">
+                                <input type="text" class="tpl-form-input"
+                                       placeholder="Please write the Description of the dish no more than 100 words"
+                                       name="description" value="{{the_dish.description}}">
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">Dish Price </label>
+                            <div class="am-u-sm-9">
+                                <input type="text" class="tpl-form-input"
+                                       placeholder="Please write the Price of the dish" name="price"
+                                       value="{{the_dish.price}}">
+                            </div>
+                        </div>
+
+
+                        <div class="am-form-group">
+                            <label for="user-phone" class="am-u-sm-3 am-form-label">Is New</label>
+                            <div class="am-u-sm-9">
+                                <select data-am-selected="{searchBox: 0}" style="display: none;" name="is_new">
+                                    {% if the_dish.is_new == 0 %}
+                                    <option value="0" selected>Not new</option>
+                                    <option value="1">Is new</option>
+                                    {% else %}
+                                    <option value="0">Not new</option>
+                                    <option value="1" selected>Is new</option>
+                                    {% endif %}
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-phone" class="am-u-sm-3 am-form-label">Is Recommend</label>
+                            <div class="am-u-sm-9">
+                                <select data-am-selected="{searchBox: 0}" style="display: none;" name="is_recommend">
+                                    {% if the_dish.is_recommend == 0 %}
+                                    <option value="0" selected>Normal</option>
+                                    <option value="1">Medium</option>
+                                    <option value="2">Large</option>
+                                    {% elif the_dish.is_recommend == 1 %}
+                                    <option value="0">Normal</option>
+                                    <option value="1" selected>Medium</option>
+                                    <option value="2">Large</option>
+                                    {% elif the_dish.is_recommend == 2 %}
+                                    <option value="0">Normal</option>
+                                    <option value="1">Medium</option>
+                                    <option value="2" selected>Large</option>
+                                    {% endif %}
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-phone" class="am-u-sm-3 am-form-label">Is Spicy</label>
+                            <div class="am-u-sm-9">
+                                <select data-am-selected="{searchBox: 0}" style="display: none;" name="is_spicy">
+                                    {% if the_dish.is_spicy == 0 %}
+                                    <option value="0" selected>Normal</option>
+                                    <option value="1">Medium</option>
+                                    <option value="2">Large</option>
+                                    {% elif the_dish.is_spicy == 1 %}
+                                    <option value="0">Normal</option>
+                                    <option value="1" selected>Medium</option>
+                                    <option value="2">Large</option>
+                                    {% elif the_dish.is_spicy == 2 %}
+                                    <option value="0">Normal</option>
+                                    <option value="1">Medium</option>
+                                    <option value="2" selected>Large</option>
+                                    {% endif %}
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-phone" class="am-u-sm-3 am-form-label">Is Selling</label>
+                            <div class="am-u-sm-9">
+                                <select data-am-selected="{searchBox: 0}" style="display: none;" name="is_selling">
+                                    {% if the_dish.is_selling == 0 %}
+                                    <option value="0" selected>Not selling</option>
+                                    <option value="1">Is selling</option>
+                                    {% else %}
+                                    <option value="0">Not selling</option>
+                                    <option value="1" selected>Is selling</option>
+                                    {% endif %}
+                                </select>
+
+                            </div>
+                        </div>
+
+
+                        <div class="am-form-group">
+                            <label for="user-weibo" class="am-u-sm-3 am-form-label">Default image</label>
+                            <div class="am-u-sm-9">
+                                <div class="am-form-group am-form-file">
+                                    <div class="tpl-form-file-img">
+                                        <img src="{{ the_dish.default_image.url }}" alt="" width="200">
+                                    </div>
+                                    <button type="button" class="am-btn am-btn-danger am-btn-sm">
+                                        <i class="am-icon-cloud-upload"></i> Upload
+                                    </button>
+                                    <input id="doc-form-file" type="file" multiple="" name="default_image">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{% endblock%}

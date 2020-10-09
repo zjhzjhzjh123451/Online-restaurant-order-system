@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xml:lang="en">
+{% load static %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Resturant-User Centre</title>
+    <link href="{% static 'shop/user_base_centre.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+<div class="header_con">
+    <header class="masthead1">
+
+
+        <div class="header">
+            <!--<div class="welcome fl"><a href="{% url 'dish:home' %}">Welcome to our restaurant!<a></a></div>-->
+
+            <!--<div class="welcome fl">Welcome to our restaurant!</div>-->
+            <div class="fr">
+                <div class="login_info fl">
+                    Welcome：<em>{{ user.username }}</em>
+                </div>
+                <div class="login_btn fl">
+                    <a href="{% url 'dish:home' %}">Welcome to our restaurant!</a>
+
+                    <!--<a href="{% url 'user:logout' %}">Logout</a>-->
+
+                </div>
+                <div class="user_link fl">
+                    <span>|</span>
+                    <a href="{% url 'user:logout' %}">Logout</a>
+
+                    <!--<a href="{% url 'user:centre_address' %}">User Centre</a>-->
+                    <span>|</span>
+                    <a href="https://coronavirus.1point3acres.com/">COVID-19 info</a>
+
+                    <!--<a href="">My Cart</a>-->
+
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+<!--<header class="masthead1">-->
+
+<!--<div class="search_bar clearfix">-->
+<!--    &lt;!&ndash;<a href="" class="logo fl"><img src="/static/logo.png" style="width:85px;height:85px;"></a>&ndash;&gt;-->
+<!--    &lt;!&ndash;<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;User Centre</div>&ndash;&gt;-->
+<!--    &lt;!&ndash;<div class="search_con fr">&ndash;&gt;-->
+<!--    &lt;!&ndash;<input type="text" class="input_text fl" name="" placeholder="Search Dish">&ndash;&gt;-->
+<!--    &lt;!&ndash;<input type="button" class="input_btn fr" name="" value="Search">&ndash;&gt;-->
+<!--    &lt;!&ndash;</div>&ndash;&gt;-->
+<!--</div>-->
+
+<div class="main_con clearfix">
+    <div class="left_menu_con clearfix">
+        <h3 style="color:white">User Centre</h3>
+        <ul>
+
+            <li><a href="{% url 'user:centre_address' %}">User Information</a></li>
+            <li><a href="{% url 'user:centre_order_list' %}" class="active">User Orders</a></li>
+
+        </ul>
+    </div>
+
+    <!--<div class="right_content clearfix">-->
+    <div class="right_content clearfix">
+        <h3 style="color:white">Order List</h3>
+<!--        <div class="common_list_con clearfix">-->
+            <ul class="goods_list_th clearfix">
+                <li class="col01">Order ID</li>
+                <li class="col02">Create Time</li>
+                <li class="col03">total $</li>
+                <li class="col04">status</li>
+                <li class="col05">Manipulate</li>
+            </ul>
+            {% for order in orders%}
+            <ul class="goods_list_th clearfix">
+                <li class="col01">{{ order.orderId }}</li>
+                <li class="col02">{{ order.created_time }}</li>
+                <li class="col03">{{ order.total }}</li>
+                <li class="col04">{% if order.status == 0 %}not paid{% elif order.status == 1 %}paid{% endif %}</li>
+                <li class="col05"><a href="{% url 'user:centre_order_detail' order.id%}"><i class="am-icon-pencil"></i>details</a>
+                </li>
+            </ul>
+            {% endfor %}
+
+        </div>
+    </div>
+<!--</div>-->
+
+
+</body>
+</html>

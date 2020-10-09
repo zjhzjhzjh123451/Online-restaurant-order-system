@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+{% load static %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Successfully Paid</title>
+    <link rel="stylesheet"  type="text/css" href="/static/shop/AmazeUI-2.4.2/assets/css/amazeui.css"/>
+    <link href="/static/shop/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+    <link href="/static/shop/basic/css/demo.css" rel="stylesheet" type="text/css" />
+
+    <link href="/static/shop/css/sustyle.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/static/shop/basic/js/jquery-1.7.min.js"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+          rel="stylesheet" type="text/css"/>
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="{% url 'dish:home' %}">Back to Home</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'user:centre_address' %}">Hello
+                    {{user.username}}</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'user:logout' %}">Log out</a>
+                </li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'user:login' %}">Log in</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'user:register' %}">Become Our
+                    Member</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="masthead1">
+    <div class="container h-100">
+
+        <div class="row1 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1_new class="text-white mt-0">You have paid successfully!</h1_new>
+            </div>
+        </div>
+
+
+
+                <div class="row2 justify-content-center">
+                <div class="successInfo">
+                    <ul>
+                        <li>The payment amount<em>${{the_order.total}}</em></li>
+                        <div class="user-info">
+                            <pp>Receiver：{{the_order.address.receiver}}</pp><br>
+                            <pp>Phone：{{the_order.address.phone}}</pp><br>
+                            <pp>Zip Code：{{the_order.address.zip_code}}</pp><br>
+                            <pp>Address：{{the_order.address.addr}}</pp>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+
+
+    </div>
+</header>
+
+
+
+<div class="clear"></div>
+
+
+
+
+
+
+
+
+</body>
+</html>

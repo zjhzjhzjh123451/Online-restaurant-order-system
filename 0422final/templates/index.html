@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Restaurant Admin</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/png" href="/static/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <script src="/static/assets/js/echarts.min.js"></script>
+    <link rel="stylesheet" href="/static/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="/static/assets/css/amazeui.datatables.min.css"/>
+    <link rel="stylesheet" href="/static/assets/css/app.css">
+    <script src="/static/assets/js/jquery.min.js"></script>
+
+</head>
+
+<body data-type="index">
+<script src="/static/assets/js/theme.js"></script>
+<div class="am-g tpl-g">
+
+    <header>
+
+        <div class="am-fl tpl-header-logo">
+<!--            <a href="javascript:;"><img src="/static/assets/img/logo.png" alt=""></a>-->
+        </div>
+
+        <div class="tpl-header-fluid">
+
+            <div class="am-fr tpl-header-navbar">
+                <ul>
+
+                    <li class="am-text-sm tpl-header-navbar-welcome">
+                        <a href="javascript:;">Welcome, <span>{{request.session.AdminUser.username}}</span> </a>
+                    </li>
+
+
+                    <li class="am-text-sm">
+                        <a href="{% url 'myadmin:myadmin_logout' %}">
+                            <span class="am-icon-sign-out"></span> EXIT
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </header>
+
+    <div class="left-sidebar">
+
+        <ul class="sidebar-nav">
+            <li class="sidebar-nav-link">
+                <a href="{% url 'myadmin:index' %}" class="active">
+                    <i class="am-icon-home sidebar-nav-link-logo"></i> MY ADMIN
+                </a>
+            </li>
+
+            <li class="sidebar-nav-link">
+                <a href="javascript:;" class="sidebar-nav-sub-title">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i>Members Manage
+                    <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                </a>
+                <ul class="sidebar-nav sidebar-nav-sub">
+                    <li class="sidebar-nav-link">
+                        <a href="{% url 'myadmin:user_list' %}">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span>Show Members
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="sidebar-nav-link">
+                <a href="javascript:;" class="sidebar-nav-sub-title">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i>Dishes Manage
+                    <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                </a>
+                <ul class="sidebar-nav sidebar-nav-sub">
+                    <li class="sidebar-nav-link">
+                        <a href="{% url 'myadmin:dish_type_list' %}">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> Show Dish types
+                        </a>
+                    </li>
+
+                    <li class="sidebar-nav-link">
+                        <a href="{% url 'myadmin:dish_list' %}">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> Show Dishes
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a href="{% url 'myadmin:dish_type_add' %}">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> Add Dish types
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a href="{% url 'myadmin:dish_add' %}">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> Add Dishes
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="sidebar-nav-link">
+                <a href="javascript:;" class="sidebar-nav-sub-title">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i>Orders Manage
+                    <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                </a>
+                <ul class="sidebar-nav sidebar-nav-sub">
+                    <li class="sidebar-nav-link">
+                        <a href="{% url 'myadmin:order_list' %}">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> Show orders
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+
+
+    <div class="tpl-content-wrapper">
+
+        <div class="container-fluid am-cf">
+        </div>
+            {% block content%}
+            {% endblock %}
+    </div>
+</div>
+</div>
+<script src="/static/assets/js/amazeui.min.js"></script>
+<script src="/static/assets/js/amazeui.datatables.min.js"></script>
+<script src="/static/assets/js/dataTables.responsive.min.js"></script>
+<script src="/static/assets/js/app.js"></script>
+
+</body>
+
+</html>

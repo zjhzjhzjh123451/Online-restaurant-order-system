@@ -1,0 +1,110 @@
+.total{
+    position: relative;
+    background-color:grey;
+    width: 100%;
+    height: 100%;
+}
+
+.total2{
+    position: relative;
+    margin: auto;
+    width:70%;
+}
+
+.container1{
+    position: relative;
+    height:150px;
+}
+
+.item1 {
+    float:left;font-family: monospace;font-size: 50px;font-weight:bold;
+    position:absolute; bottom: 50px;
+}
+
+.item2{
+    float:right;font-size: 25px;
+    font-family:"Microsoft YaHei",Tahoma,Verdana,SimSun;
+    position:absolute; bottom: 50px; right:0px;
+}
+
+.container2 {
+    height: 400px;
+}
+
+.container3 {
+
+}
+
+.item3 {
+    font-family: monospace;font-size: 50px;font-weight:bold;
+    text-align: center;
+}
+
+.item4{
+    text-align: center;
+    height: 70px;
+    color:blue;
+}
+
+.item5{
+    font-family:"Microsoft YaHei",Tahoma,Verdana,SimSun;
+    font-size:25px;
+    background-color:black;
+    color:white;
+
+}
+
+.item6{
+        font-family: monospace;
+        text-align: center;
+        border: none;
+        font-size: 24px;
+        width:24%;
+        background-color:rgb(173,255,47);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.page_name {
+    position: relative;
+    height:30px;
+}
+
+
+.button{
+    font-family: monospace;
+    font-size: x-large;
+    width: 100%;
+    height: 50px;
+}
+
+.menu_1st{
+    width: 100%
+    font-family: monospace;
+    text-align: center;
+}
+
+.moji{
+    font-family: monospace;
+    text-align: center;
+}
+
+.moji button{
+    font-family: monospace;
+    text-align: center;
+    border: none;
+    font-size: 24px;
+    width:24%;
+    background-color:white;
+}
+
+

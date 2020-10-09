@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+{% load static %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0 ,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+          rel="stylesheet" type="text/css"/>
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css"/>
+    <title>Checkout Page</title>
+
+    <link href="/static/shop/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css"/>
+
+    <link href="/static/shop/basic/css/demo.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/shop/css/cartstyle.css" rel="stylesheet" type="text/css"/>
+
+    <link href="/static/shop/css/jsstyle.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" src="/static/shop/js/address.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="{% url 'dish:home' %}">Back to Home</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'user:centre_address' %}">Hello
+                    {{user.username}}</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'user:logout' %}">Log out</a>
+                </li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'user:login' %}">Log in</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'user:register' %}">Become Our
+                    Member</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container h-100">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1_new class="text-white mt-0">CHECKOUT</h1_new>
+            </div>
+        </div>
+
+
+            <div class="paycont">
+                <div class="address" style="margin-bottom:50px;">
+                    <h3>Confirm the receive address </h3>
+                    <div class="control">
+                        <a class="tc-btn createAddr theme-login am-btn am-btn-danger"
+                           href="{% url 'user:other_address' the_order.id %}">use other address</a>
+                    </div>
+                    <div class="clear"></div>
+                    <ul>
+
+                        <div class="per-border"></div>
+                        {% if the_address%}
+                        <li class="user-addresslist">
+                            <div class="address-left">
+                                <div class="user DefaultAddr">
+
+										<span class="buy-address-detail">
+                   <span class="buy-user">{{the_address.receiver}}</span>
+										<span class="buy-phone">{{the_address.phone}}</span>
+										</span>
+                                </div>
+                                <div class="default-address DefaultAddr" style="font-size:15px;">
+                                    <span class="buy-line-title buy-line-title-type">Address:  </span>
+                                    <span class="buy--address-detail">
+										<span class="street">{{the_address.addr}}<br>Zip Code: {{the_address.zip_code}}</span>
+										</span>
+
+                                </div>
+                                <ins class="deftip hidden">default address</ins>
+                            </div>
+                            <div class="address-right">
+                                <span class="am-icon-angle-right am-icon-lg"></span>
+                            </div>
+                            <div class="clear"></div>
+
+
+                        </li>
+                        {% else %}
+                        <script>alert("Please write a default address first");location.href="{% url 'user:other_address' the_order.id %}"</script>
+                        {% endif %}
+                    </ul>
+
+                    <div class="clear"></div>
+                </div>
+
+                <div class="clear"></div>
+
+
+                <div class="concent">
+                    <div id="payTable">
+                        <h3>Confirm the order information</h3>
+                        <div class="cart-table-th">
+                            <div class="wp" style="font-size:large;color:orange;">
+                                <div class="th th-item">
+                                    <div class="td-inner">Dish</div>
+                                </div>
+                                <div class="th th-price">
+                                    <div class="td-inner">Price</div>
+                                </div>
+                                <div class="th th-amount">
+                                    <div class="td-inner">Count</div>
+                                </div>
+                                <div class="th th-sum">
+                                    <div class="td-inner">Sub total</div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        {% for item in list%}
+                        <tr class="item-list">
+                            <div class="bundle  bundle-last">
+
+                                <div class="bundle-main">
+                                    <ul class="item-content clearfix">
+                                        <div class="pay-phone">
+                                            <li class="td td-item">
+                                                <div class="item-pic">
+                                                    <img src="{{ item.dish.default_image.url }}"
+                                                         width="90">
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="item-basic-info">
+                                                        <p class="item-title J_MakePoint" data-point="tbcart.8.11">{{ item.dish.name }}</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="td td-price">
+                                                <div class="item-price price-promo-promo">
+                                                    <div class="price-content">
+                                                        <em class="J_Price price-now">{{item.price}}</em>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </div>
+                                        <li class="td td-amount">
+                                            <div class="amount-wrapper ">
+                                                <div class="item-amount ">
+                                                    <span class="phone-title">购买数量</span>
+                                                    <div class="sl">
+                                                        <input disabled class="text_box" name="" type="text"
+                                                               value="{{item.count}}"
+                                                               style="width:30px;font-size:large"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="td td-sum">
+                                            <div class="td-inner">
+                                                <em tabindex="0" class="J_ItemSum number" style="font-size:large">{{item.subtotal}}</em>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </tr>
+                        {% endfor%}
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="pay-total">
+                    <div class="buy-point-discharge ">
+                        <p class="price g_price " style="font-size:2rem;">
+                            <em class="pay-sum1">Total <span>$</span></em>
+                            <em class="pay-sum">{{the_order.total}}</em>
+                        </p>
+                    </div>
+
+                    <div class="order-go clearfix">
+                        <div class="pay-confirm clearfix">
+                            <div class="box">
+                                <div tabindex="0" id="holyshit267" class="realPay">
+                                    <span class="price g_price ">
+                                        <em class="style-large-bold-black">Final Payment：</em>
+                                    <span>$</span> <em class="style-large-bold-red " id="J_ActualFee">{{the_order.total}}</em>
+											</span>
+                                </div>
+
+
+                                <div id="holyshit269" class="submitOrder">
+                                    <div class="go-btn-wrap">
+                                    <div id="paypal-button-container"></div>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+
+</header><script src="https://www.paypal.com/sdk/js?client-id=Acwu0m1d16iFZuaOjEuuf5lldtF-gE0MPUtJORlZaGj0tad-bCEIVqKCeC2hTfdDbhf_Cxu9MBhYVdND"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.</script>
+<script>
+
+
+//<!--function getCookie(name) {-->
+//<!--    var cookieValue = null;-->
+//<!--    if (document.cookie && document.cookie !== '') {-->
+//<!--        var cookies = document.cookie.split(';');-->
+//<!--        for (var i = 0; i < cookies.length; i++) {-->
+//<!--            var cookie = cookies[i].trim();-->
+//<!--            // Does this cookie string begin with the name we want?-->
+//<!--            if (cookie.substring(0, name.length + 1) === (name + '=')) {-->
+//<!--                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));-->
+//<!--                break;-->
+//<!--            }-->
+//<!--        }-->
+//<!--    }-->
+//<!--    return cookieValue;-->
+//<!--}-->
+//<!--var csrftoken = getCookie('csrftoken');-->
+
+//<!--  function completeOrder(){-->
+//<!--            var url = "{% url 'order:success_page' the_order.id %}"-->
+
+//<!--                method:'POST',-->
+//<!--                headers:{-->
+//<!--                    'Content-type':'application/json',-->
+//<!--                    'X-CSRFToken':csrftoken,-->
+//<!--                },-->
+//<!--            })-->
+//<!--        }-->
+
+ var total='{{the_order.total}}'
+
+  paypal.Buttons({
+
+    createOrder: function(data, actions) {
+      // This function sets up the details of the transaction, including the amount and line item details.
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: total
+          }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      // This function captures the funds from the transaction.
+      return actions.order.capture().then(function(details) {
+        // This function shows a transaction success message to your buyer.
+         window.location.replace("{% url 'order:success_page' the_order.id %}")
+        //alert('Transaction completed by ' + details.payer.name.given_name);
+      });
+    }
+  }).render('#paypal-button-container');
+  //This function displays Smart Payment Buttons on your web page.
+
+</script>
+
+</body>
+
+</html>

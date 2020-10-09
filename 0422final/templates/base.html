@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <link href="{% static 'home.css' %}" rel="stylesheet" type="text/css"/>
+    <title>Order System</title>
+</head>
+
+<body>
+<div class="total">
+    <div class="total2">
+
+        <div class="container1">
+            <div class="item1">
+                Restaurant
+                <img src="/static/logo.png" width="50" height="50" alt="logo_pic">
+            </div>
+            {% block title_information %}
+
+            {% endblock%}
+        </div>
+
+        <div class="container2">
+            <img src="/static/main_pic.jpg" width="100%" height="300px" alt="main_pic">
+        </div>
+
+    </div>
+</div>
+
+{% comment %}
+{% if user.is_authenticated %}
+<div class="item2">
+    <span>Hello {{user.username}}</span>
+    <a href="{% url 'user:logout' %}">Logout</a>
+</div>
+{% else %}
+<div class="item2">
+    <a href="{% url 'user:login' %}">login</a>
+    <a href="{% url 'user:register' %}">Become our member</a>
+</div>
+{% endif %}
+
+{% endcomment %}

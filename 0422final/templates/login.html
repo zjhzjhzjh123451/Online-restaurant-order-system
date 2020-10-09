@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <title>Log in</title>
+</head>
+<body>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="{% url 'dish:home' %}">Restaurant Home</a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'user:register' %}">Become Our Member</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- About section-->
+<header class="masthead1">
+    <div class="container h-100">
+        <div class="row h-25 align-items-center justify-content-center text-center">
+            <div class="col-lg-10 align-self-end">
+                <h1 class="text-uppercase text-white font-weight-bold">LOG IN</h1>
+                <hr class="divider my-4" />
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <form method="post" action="{% url 'user:login' %}">
+                <div class="formcontainer">
+                    {% for field in form.visible_fields %}
+                    <p_no_margin class="text-white-75 font-weight-light">{{field.label_tag}} </p_no_margin>
+                    <br>
+                    <p_no_margin class="text-white-75 font-weight-light">{{field}} </p_no_margin>
+                    <br>
+                    <br>
+                    {% endfor %}
+
+                    <!--<p_no_margin class="text-yellow-75 font-weight-light">{{form.non_field_errors}} </p_no_margin>-->
+                    {% if form.non_field_errors %}
+                        <p_no_margin class="text-yellow-75 font-weight-light">Invalid username/password! </p_no_margin><br>
+                        <p_no_margin class="text-yellow-75 font-weight-light">Or ACTIVE your account! </p_no_margin><br>
+                    {% endif %}
+                    <br>
+                    <input type="checkbox" name="remember" {{ checked }}>
+                    <label class="text-white-75 font-weight-light">Remember Me</label>
+                    {% csrf_token %}
+                </div>
+                <div class="row justify-content-center">
+                    <button class="btn btn-primary btn-xl js-scroll-trigger" type="submit" id="id_login_button">Submit</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</header>
+
+</body>
+</html>

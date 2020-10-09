@@ -1,0 +1,80 @@
+{% extends 'index.html' %}
+{% block content%}
+
+<div class="row-content am-cf">
+    <div class="row">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title  am-cf">Dish Type List</div>
+                    <div class="widget-title  am-cf"><a href="{% url 'myadmin:dish_add' %}">Continue to Add Dish</a>
+                    </div>
+                </div>
+                <div class="widget-body  am-fr">
+
+                    <div class="am-u-sm-12">
+                        <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black ">
+                            <thead>
+                            <tr>
+                                <th>Default Image</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Price</th>
+                                <th>Is New</th>
+                                <th>Is Recommend</th>
+                                <th>Is Spicy</th>
+                                <th>Is Selling</th>
+                                <th>Manipulate</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in list%}
+                            <tr class="gradeX">
+                                <td><img src="{{ item.default_image.url }}" class="tpl-table-line-img" alt=""></td>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.typeid.name }}</td>
+                                <td>{{ item.price }}</td>
+                                <td>{% if item.is_new == 0 %}not new{% elif item.is_new == 1 %}new{% endif %}</td>
+                                <td>{% if item.is_recommend == 0 %}normal{% elif item.is_recommend == 1 %}medium{% elif item.is_recommend == 2 %} large {% endif %}
+                                </td>
+                                <td>{% if item.is_spicy == 0 %}normal{% elif item.is_spicy == 1 %}medium{% elif item.is_spicy == 2 %}large{% endif %}
+                                </td>
+                                <td>{% if item.is_selling == 0 %}not sell{% elif item.is_selling == 1 %}sell{% endif %}</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="{% url 'myadmin:dish_edit' item.id%}">
+                                            <i class="am-icon-pencil"></i> edit
+                                        </a>
+<!--                                        <a href="{% url 'myadmin:dish_delete' item.id%}"-->
+<!--                                           class="tpl-table-black-operation-del">-->
+<!--                                            <i class="am-icon-trash"></i> delete-->
+<!--                                        </a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            <!-- more data -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="am-u-lg-12 am-cf">
+
+<!--                        <div class="am-fr">-->
+<!--                            <ul class="am-pagination tpl-pagination">-->
+<!--                                <li class="am-disabled"><a href="#">«</a></li>-->
+<!--                                <li class="am-active"><a href="#">1</a></li>-->
+<!--                                <li><a href="#">2</a></li>-->
+<!--                                <li><a href="#">3</a></li>-->
+<!--                                <li><a href="#">4</a></li>-->
+<!--                                <li><a href="#">5</a></li>-->
+<!--                                <li><a href="#">»</a></li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

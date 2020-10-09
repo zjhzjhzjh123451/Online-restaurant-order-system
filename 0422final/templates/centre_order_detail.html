@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xml:lang="en">
+{% load static %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Resturant-User Centre</title>
+    <link href="{% static 'shop/user_base_centre.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css"/>
+
+    <link href="/static/shop/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css"/>
+
+    <link href="/static/shop/basic/css/demo.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/shop/css/cartstyle.css" rel="stylesheet" type="text/css"/>
+
+    <link href="/static/shop/css/jsstyle.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div class="header_con">
+    <header class="masthead1">
+
+
+        <div class="header">
+            <!--<div class="welcome fl"><a href="{% url 'dish:home' %}">Welcome to our restaurant!<a></a></div>-->
+
+            <!--<div class="welcome fl">Welcome to our restaurant!</div>-->
+            <div class="fr">
+                <div class="login_info fl">
+                    Welcome：<em>{{ user.username }}</em>
+                </div>
+                <div class="login_btn fl">
+                    <a href="{% url 'dish:home' %}">Welcome to our restaurant!</a>
+
+                    <!--<a href="{% url 'user:logout' %}">Logout</a>-->
+
+                </div>
+                <div class="user_link fl">
+                    <span>|</span>
+                    <a href="{% url 'user:logout' %}">Logout</a>
+
+                    <!--<a href="{% url 'user:centre_address' %}">User Centre</a>-->
+                    <span>|</span>
+                    <a href="https://coronavirus.1point3acres.com/">COVID-19 info</a>
+
+                    <!--<a href="">My Cart</a>-->
+
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+<!--<header class="masthead1">-->
+
+
+<!--<div class="search_bar clearfix">-->
+<!--<a href="" class="logo fl"><img src="/static/logo.png" style="width:85px;height:85px;"></a>-->
+<!--<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;User Centre</div>-->
+<!--<div class="search_con fr">-->
+<!--<input type="text" class="input_text fl" name="" placeholder="Search Dish">-->
+<!--<input type="button" class="input_btn fr" name="" value="Search">-->
+<!--</div>-->
+<!--</div>-->
+
+
+<div class="main_con clearfix">
+    <div class="left_menu_con clearfix">
+        <h3 style="color:white">User Centre</h3>
+        <ul>
+            <li><a href="{% url 'user:centre_address' %}">User Information</a></li>
+            <li><a href="{% url 'user:centre_order_list' %}" class="active">User Orders</a></li>
+        </ul>
+    </div>
+
+
+    <!--<div class="right_content clearfix">-->
+    <!--<h3 class="common_title2">Order: {{ order.id }}</h3>-->
+    <!--<ul class="order_list_th w978 clearfix">-->
+    <!--<li class="col01">Image</li>-->
+    <!--<li class="col02">Name</li>-->
+    <!--<li class="col03">Price $</li>-->
+    <!--<li class="col04">Count</li>-->
+    <!--<li class="col05">Subtotal $</li>-->
+
+
+    <!--</ul>-->
+    <div class="right_content clearfix">
+        <!--        <table class="order_list_table w980">-->
+        <!--            <tbody>-->
+        <!--            <tr>-->
+        <!--                <td width="100%">-->
+        <h3 style="color:white; font-size: 1.75rem;">Order Detail</h3>
+        <ul class="goods_list_th clearfix">
+            <li class="col01">Image</li>
+            <li class="col02">Name</li>
+            <li class="col03">Price $</li>
+            <li class="col04">Count</li>
+            <li class="col05">Subtotal $</li>
+
+        </ul>
+        {% for item in dishes%}
+
+        <ul class="goods_list_th clearfix" style="height:60px">
+            <li class="col01"><img src="{{ item.dish.default_image.url }}" alt=""
+                                   style="width:50px;height:50px;">
+            </li>
+            <li class="col02">{{ item.dish.name }}</li>
+            <li class="col03">{{ item.price }}</li>
+            <li class="col04">{{ item.count }}</li>
+            <li class="col05">{{ item.subtotal }}</li>
+        </ul>
+        <br/>
+        {% endfor %}
+
+
+        <!--                </td>-->
+
+        <!--            </tr>-->
+        <!--            </tbody>-->
+        <!--        </table>-->
+
+        <!--<div class="common_list_con clearfix">-->
+        <!--<ul class="goods_list_th clearfix">-->
+        <!--<li class="col01">Image</li>-->
+        <!--<li class="col02">Name</li>-->
+        <!--<li class="col03">Price $</li>-->
+        <!--<li class="col04">Count</li>-->
+        <!--<li class="col05">Subtotal $</li>-->
+        <!--</ul>-->
+        <!--{% for item in dishes%}-->
+        <!--<ul class="goods_list_th clearfix">-->
+        <!--<li class="col01"><img src="{{ item.dish.default_image.url }}" alt="" style="width:30px;height:30px;"></li>-->
+        <!--<li class="col02">{{ item.dish.name }}</li>-->
+        <!--<li class="col03">{{ item.price }}</li>-->
+        <!--<li class="col04">{{ item.count }}</li>-->
+        <!--<li class="col05">{{ item.subtotal }}</li>-->
+        <!--</ul>-->
+        <!--{% endfor %}-->
+        <!--</div>-->
+
+
+        <!--        <div class="common_list_con clearfix">-->
+        <div class="settle_con">
+            <div class="total_pay" style="font-size:25px">Total：$ {{ order.total }}</div>
+        </div>
+        <!--        </div>-->
+
+        <div class="container" style="text-align:right;">
+            <div class="tc-btn createAddr theme-login am-btn am-btn-danger">
+                {% if order.status == 0 %}
+                <a href="{% url 'order:order_page' order.id%}" style="color:white;">pay for it</a>
+                {% elif order.status == 1 %}
+                <a href="{% url 'order:order_page' order.id%}" style="color:white;">check success page</a>
+                {% endif %}
+            </div>
+        </div>
+
+
+        <!--        </div>-->
+
+    </div>
+</div>
+
+
+</body>
+</html>

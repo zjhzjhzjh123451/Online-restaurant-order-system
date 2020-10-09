@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xml:lang="en">
+{% load static %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Resturant-User Centre</title>
+    <link href="{% static 'shop/user_base_centre.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+
+<div class="header_con">
+    <header class="masthead1">
+
+
+        <div class="header">
+            <!--<a href="" class="logo fl"><img src="/static/logo.png" style="width:85px;height:85px;"></a>-->
+
+
+            <!--<div class="welcome fl"><a href="{% url 'dish:home' %}">Welcome to our restaurant!<a></a></div>-->
+
+            <!--<div class="welcome fl">Welcome to our restaurant!</div>-->
+            <div class="fr">
+                <div class="login_info fl">
+                    Welcome：<em>{{ user.username }}</em>
+                </div>
+                <div class="login_btn fl">
+                    <a href="{% url 'dish:home' %}">Welcome to our restaurant!</a>
+
+                    <!--<a href="{% url 'user:logout' %}">Logout</a>-->
+
+                </div>
+                <div class="user_link fl">
+                    <span>|</span>
+                    <a href="{% url 'user:logout' %}">Logout</a>
+
+                    <!--<a href="{% url 'user:centre_address' %}">User Centre</a>-->
+                    <!--<a href="{% url 'dish:home' %}">Welcome to our restaurant!<a>-->
+
+                    <span>|</span>
+                    <a href="https://coronavirus.1point3acres.com/">COVID-19 info</a>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+</div>
+<!--<header class="masthead1">-->
+<!--        <div class="search_bar clearfix">-->
+<!--<a href="" class="logo fl"><img src="/static/logo.png" style="width:85px;height:85px;"></a>-->
+
+<!--<a href="" class="logo fl"><img src="/static/logo.png" style="width:1600px;height:650px;"></a>-->
+<!--<a href="" class="logo fl"><img src="/static/main_pic.jpg"></a>-->
+<!--<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;User Centre</div>-->
+<!--<div class="search_con fr">-->
+<!--<input type="text" class="input_text fl" name="" placeholder="Search Dish">-->
+<!--<input type="button" class="input_btn fr" name="" value="Search">-->
+<!--</div>-->
+<!--        </div>-->
+
+<div class="main_con clearfix">
+    <div class="left_menu_con clearfix">
+        <h3 style="color:white">User Centre</h3>
+        <ul>
+            <!--                <li><a href="{% url 'user:centre_information' %}" >User Information</a></li>-->
+
+            <li><a href="{% url 'user:centre_address' %}" class="active">User Information</a></li>
+            <li><a href="{% url 'user:centre_order_list' %}">User Orders</a></li>
+        </ul>
+    </div>
+    <div class="right_content clearfix">
+
+        <h3 class="common_title2">User Information</h3>
+        <div class="site_con">
+            <dl>
+                <dt>User Name: {{ user.username }}</dt>
+                <dt>Current Address:</dt>
+                {% if address %}
+                <dd>{{ address.addr }} ({{ address.receiver }} recieve)</dd>
+                <dt>Phone number:</dt>
+                <dd>{{ address.phone }}</dd>
+                {% else %}
+                <dd>No default address</dd>
+                {% endif %}
+                <!--                        <dt>Phone Number: {{ user.username }}</dt>-->
+            </dl>
+        </div>
+        <!--                <h3 class="common_title2">Receive Address</h3>-->
+        <!--                <div class="site_con">-->
+        <!--                    <dl>-->
+        <!--                        <dt>Current Address: </dt>-->
+        <!--                        {% if address %}-->
+        <!--                        <dd>{{ address.addr }}  ({{ address.receiver }} recieve)  {{ address.phone }}</dd>-->
+        <!--                        {% else %}-->
+        <!--                        <dd>No default address</dd>-->
+        <!--                        {% endif %}-->
+        <!--                    </dl>-->
+        <!--                </div>-->
+
+        <h3 class="common_title2">Edit Address</h3>
+        <div class="site_con">
+            <form method="post" action="{% url 'user:other_address' order_id %}">
+                {% csrf_token %}
+                <div class="form_group">
+                    <label style="font-weight:bold;">Receiver: </label>
+                    <input type="text" name="receiver">
+                </div>
+                <div class="form_group form_group2">
+                    <label style="font-weight:bold;">Specific Address: </label>
+                    <textarea class="site_area" name="address"></textarea>
+                </div>
+                <div class="form_group">
+                    <label style="font-weight:bold;">Zip Code: </label>
+                    <input type="text" name="zip_code">
+                </div>
+                <div class="form_group">
+                    <label style="font-weight:bold;">Phone: </label>
+                    <input type="text" name="phone">
+                </div>
+
+                <input type="submit" value="Submit" class="info_submit">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

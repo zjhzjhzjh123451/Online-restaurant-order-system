@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xml:lang="en">
+{% load static %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Resturant-User Centre</title>
+    <link href="{% static 'shop/user_base_centre.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css"/>
+
+</head>
+<div>
+    <div class="header_con">
+        <header class="masthead1">
+            <a href="" class="logo fl"><img src="/static/logo.png" style="width:85px;height:85px;"></a>
+
+
+            <div class="header">
+                <!--<div class="welcome fl"><a href="{% url 'dish:home' %}">Welcome to our restaurant!<a></a></div>-->
+
+                <!--<div class="welcome fl">Welcome to our restaurant!</div>-->
+                <div class="fr">
+                    <div class="login_info fl">
+                        Welcome：<em>{{ user.username }}</em>
+                    </div>
+                    <div class="login_btn fl">
+                        <a href="{% url 'dish:home' %}">Welcome to our restaurant!</a>
+
+                            <!--<a href="{% url 'user:logout' %}">Logout</a>-->
+
+                    </div>
+                    <div class="user_link fl">
+                        <span>|</span>
+                        <a href="{% url 'user:logout' %}">Logout</a>
+
+                        <!--<a href="{% url 'user:centre_address' %}">User Centre</a>-->
+                        <span>|</span>
+                        <a href="https://coronavirus.1point3acres.com/">COVID-19 info</a>
+
+                        <!--<a href="">My Cart</a>-->
+
+                    </div>
+                </div>
+            </div>
+            <!--<header class="masthead1">-->
+
+
+            <div class="search_bar clearfix">
+                <!--<a href="" class="logo fl"><img src="/static/logo.png" style="width:85px;height:85px;"></a>-->
+                <!--<a href="" class="logo fl"><img src="/static/main_pic.jpg"></a>-->
+                <!--<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;User Centre</div>-->
+                <!--<div class="search_con fr">-->
+                <!--<input type="text" class="input_text fl" name="" placeholder="Search Dish">-->
+                <!--<input type="button" class="input_btn fr" name="" value="Search">-->
+                <!--</div>-->
+            </div>
+
+            <div class="main_con clearfix">
+                <div class="left_menu_con clearfix">
+                    <h3>User Centre</h3>
+                    <ul>
+                        <li><a href="{% url 'user:centre_information' %}" class="active">User Information</a></li>
+                        <li><a href="{% url 'user:centre_order_list' %}">User Orders</a></li>
+                        <li><a href="{% url 'user:centre_address' %}">User Address</a></li>
+                    </ul>
+                </div>
+
+
+                <!--        <div class="right_content clearfix">-->
+                <!--                        <div class="info_con clearfix">-->
+                <!--                            <br><br>-->
+                <!--                        <h3 class="common_title2">Specific Information</h3>-->
+
+                <!--                                <ul class="user_info_list">-->
+                <!--                                    <li><span>Name: </span>{{ user.username }}</li>-->
+                <!--                                    {% if address %}-->
+                <!--                                        <li><span>Phone: </span>{{ address.phone }}</li>-->
+                <!--                                        <li><span>Address: </span>{{ address.addr }}</li>-->
+                <!--                                    {% else %}-->
+                <!--                                        <li><span>Phone: </span>No Default</li>-->
+                <!--                                        <li><span>Address: </span>No Default</li>-->
+                <!--                                    {% endif %}-->
+                <!--                                </ul><br><br><br>-->
+                <!--                        </div>-->
+                <!--                </div>-->
+
+            </div>
+
+
+            <div class="footer">
+                <div class="foot_link">
+                    <a href="">About Us</a>
+                    <span>|</span>
+                    <a href="">Contact Us</a>
+
+                </div>
+            </div>
+        </header>
+    </div>
+</div>
+</body>
+</html>

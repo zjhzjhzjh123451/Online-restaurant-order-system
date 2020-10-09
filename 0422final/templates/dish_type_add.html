@@ -1,0 +1,60 @@
+{% extends 'index.html' %}
+{% block content%}
+
+<div class="row-content am-cf">
+
+
+    <div class="row">
+
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+            <div class="widget am-cf">
+                <div class="widget-head am-cf">
+                    <div class="widget-title am-fl">Add types here</div>
+                    <div class="widget-function am-fr">
+                        <a href="javascript:;" class="am-icon-cog"></a>
+                    </div>
+                </div>
+                <div class="widget-body am-fr">
+
+                    <form class="am-form tpl-form-line-form" method="post" action="{% url 'myadmin:dish_type_add' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">Type Name</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" class="tpl-form-input" id="user-name" placeholder="Please input the type name" name="name">
+                            </div>
+                        </div>
+
+
+
+                        <div class="am-form-group">
+                            <label for="user-weibo" class="am-u-sm-3 am-form-label"> Type Image</label>
+                            <div class="am-u-sm-9">
+                                <div class="am-form-group am-form-file">
+                                    <button type="button" class="am-btn am-btn-danger am-btn-sm">
+                                        <i class="am-icon-cloud-upload"></i> Upload
+                                    </button>
+                                    <input id="doc-form-file" type="file" multiple="" name="type_image">
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">Submit
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{% endblock%}
